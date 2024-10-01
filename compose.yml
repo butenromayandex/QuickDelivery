@@ -1,0 +1,53 @@
+name: 'quick-delivery'
+
+services:
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    ports:
+      - "6000:5000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@pg.local:5454/orders
+    depends_on:
+      - db
+    networks:
+      - quickdelivery-network
+
+  logistics-service:
+    build: ./logistics-service
+    container_name: logistics-service
+    ports:
+      - "6001:5001"
+    environment:
+      - DATABASE_URL=postgresql://user:password@pg.local:5454/logistics
+    depends_on:
+      - db
+    networks:
+      - quickdelivery-network
+
+  db:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_MULTIPLE_DATABASES: orders,logistics
+    ports:
+      - "5454:5432"
+    networks:
+      - quickdelivery-network
+    volumes:
+      - app-data:/var/lib/postgresql
+      - ./multiple-databases.sh:/docker-entrypoint-initdb.d/multiple-databases.sh
+
+
+networks:
+  quickdelivery-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 200.17.0.0/16
+
+volumes:
+  app-data:
