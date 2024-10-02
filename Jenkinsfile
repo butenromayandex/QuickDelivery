@@ -5,7 +5,9 @@ pipeline {
     }
     stages {
         stage('test docker') {
-            sh 'docker'
+            steps {
+                sh 'docker'
+            }
         }
         stage('Install Dependencies') {
             steps {
