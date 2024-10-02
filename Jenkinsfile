@@ -35,13 +35,15 @@ pipeline {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS'
                     }
                 }
-                script {
-                    docker.image('docker:latest').inside {
-                        sh '''
-                            docker login -u butenroma -p $DOCKER_PWD
-                            docker push butenroma/logistics-service:latest
-                            docker push butenroma/order-service:latest
-                        '''
+                steps {
+                    script {
+                        docker.image('docker:latest').inside {
+                            sh '''
+                                docker login -u butenroma -p $DOCKER_PWD
+                                docker push butenroma/logistics-service:latest
+                                docker push butenroma/order-service:latest
+                            '''
+                        }
                     }
                 }
             }
