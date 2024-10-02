@@ -18,10 +18,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    docker.image('docker:latest').inside {
-                        docker-compose
-                    }
+                sh '''
+                    docker-compose build
+                '''
                 }
             }
         }
@@ -37,10 +36,8 @@ pipeline {
     stage('Deploy') {
         steps {
             script {
-                docker.image('docker:latest').inside {
-                    sh 'docker push butenroma/logistics-service'
-                    sh 'docker push butenroma/orders-service'
-                }
+                sh 'docker push butenroma/logistics-service'
+                sh 'docker push butenroma/orders-service'
             }
         }
     }
