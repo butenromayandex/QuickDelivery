@@ -24,7 +24,15 @@ pipeline {
                 }
             }
         }
-    }
+         stage('Deploy') {
+                steps {
+                    script {
+                        sh 'docker push butenroma/logistics-service'
+                        sh 'docker push butenroma/orders-service'
+                    }
+                }
+            }
+         }
 //     stage('Test') {
 //         steps {
 //             script {
@@ -34,14 +42,6 @@ pipeline {
 //             }
 //         }
 //     }
-    stage('Deploy') {
-        steps {
-            script {
-                sh 'docker push butenroma/logistics-service'
-                sh 'docker push butenroma/orders-service'
-            }
-        }
-    }
 
 //     post {
 //         always {
