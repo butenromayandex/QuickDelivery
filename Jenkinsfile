@@ -20,19 +20,21 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '''
-                    docker-compose build
-                '''
+                docker.image('docker:latest').inside {
+                    sh 'docker-compose build'
+                }
             }
         }
         stage('Deploy') {
             steps {
-                sh '''
-                    docker image ls
-                    docker login -u butenroma -p $DOCKER_PWD
-                    docker push butenroma/logistics-service:latest
-                    docker push butenroma/orders-service:latest
-                '''
+                docker.image('docker:latest').inside {
+                    sh '''
+                        docker image ls
+                        docker login -u butenroma -p $DOCKER_PWD
+                        docker push butenroma/logistics-service:latest
+                        docker push butenroma/orders-service:latest
+                    '''
+                }
             }
         }
     }
