@@ -16,15 +16,15 @@ pipeline {
                     url: 'https://github.com/butenromayandex/QuickDelivery.git'
             }
         }
-//     stage('Build') {
-//         steps {
-//             script {
-//                 docker.image('maven:3.6.3').inside {
-//                     sh 'mvn clean install'
-//                 }
-//             }
-//         }
-//     }
+        stage('Build') {
+            steps {
+                script {
+                    docker.image('docker:latest').inside {
+                        docker compose build
+                    }
+                }
+            }
+        }
 //     stage('Test') {
 //         steps {
 //             script {
@@ -38,9 +38,8 @@ pipeline {
         steps {
             script {
                 docker.image('docker:latest').inside {
-                    sh 'docker'
-                    sh 'docker compose up -d --build'
-                    sh 'docker compose ps'
+                    sh 'docker push butenroma/logistics-service'
+                    sh 'docker push butenroma/orders-service'
                 }
             }
         }

@@ -3,6 +3,7 @@ name: 'quick-delivery'
 services:
   order-service:
     build: ./order-service
+    image: 'butenroma/order-service'
     container_name: order-service
     ports:
       - "6000:5000"
@@ -15,6 +16,7 @@ services:
 
   logistics-service:
     build: ./logistics-service
+    image: 'butenroma/logistics-service'
     container_name: logistics-service
     ports:
       - "6001:5001"
