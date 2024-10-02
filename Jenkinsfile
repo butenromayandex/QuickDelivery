@@ -35,7 +35,7 @@ pipeline {
                         sh '''
                             docker login -u butenroma -p $DOCKER_PWD
                             docker push butenroma/logistics-service:latest
-                            docker push butenroma/orders-service:latest
+                            docker push butenroma/order-service:latest
                         '''
                     }
                 }
