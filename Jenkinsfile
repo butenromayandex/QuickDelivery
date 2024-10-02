@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 scripts {
-                    docker.image('docker:latest').inside {
+                    @docker.image('docker:latest').inside {
                         sh 'docker-compose build'
                     }
                 }
@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 scripts {
-                    docker.image('docker:latest').inside {
+                    @docker.image('docker:latest').inside {
                         sh '''
                             docker image ls
                             docker login -u butenroma -p $DOCKER_PWD
