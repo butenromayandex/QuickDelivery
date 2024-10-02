@@ -28,19 +28,18 @@ pipeline {
                 }
             }
         }
-//         stage('Deploy') {
-//             steps {
-//                 scripts {
-//                     @docker.image('docker:latest').inside {
-//                         sh '''
-//                             docker image ls
-//                             docker login -u butenroma -p $DOCKER_PWD
-//                             docker push butenroma/logistics-service:latest
-//                             docker push butenroma/orders-service:latest
-//                         '''
-//                     }
-//                 }
-//             }
-//         }
+        stage('Deploy') {
+            steps {
+                script {
+                    docker.image('docker:latest').inside {
+                        sh '''
+                            docker login -u butenroma -p $DOCKER_PWD
+                            docker push butenroma/logistics-service:latest
+                            docker push butenroma/orders-service:latest
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
