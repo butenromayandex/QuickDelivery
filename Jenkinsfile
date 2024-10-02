@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    echo $DOCKER_PWD
+                    docker image ls
                     docker login -u butenroma -p $DOCKER_PWD
                     docker push butenroma/logistics-service:latest
                     docker push butenroma/orders-service:latest
