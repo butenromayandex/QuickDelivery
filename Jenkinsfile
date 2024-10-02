@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKER_PWD = credentials('dockerpwd')
+    }
     stages {
         stage('Install Dependencies') {
             steps {
@@ -27,7 +29,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'dockerpwd', variable: 'pwd')]) {
                     sh '''
-                        docker login -u butenroma -p ${pwd}"
+                        docker login -u butenroma -p ${DOCKER_PWD}
                         docker push butenroma/logistics-service
                         docker push butenroma/orders-service
                     '''
