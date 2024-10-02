@@ -31,7 +31,6 @@ pipeline {
                         sh 'docker push butenroma/orders-service'
                     }
                 }
-            }
          }
     }
 
