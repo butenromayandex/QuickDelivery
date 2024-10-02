@@ -20,7 +20,8 @@ pipeline {
             steps {
                 script {
                     docker.image('docker:latest').inside {
-                        docker-compose build
+                        docker-compose up -d --build
+                        docker-compose ps
                     }
                 }
             }
