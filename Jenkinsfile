@@ -25,10 +25,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh '''
-                    docker push butenroma/logistics-service
-                    docker push butenroma/orders-service
-                '''
+                withCredentials([string(credentialsId: '57f29692-c28f-409f-82ec-8bee5d39394b', variable: 'pwd')]) {
+                    sh '''
+                        docker login -u butenroma -p ${pwd}"
+                        docker push butenroma/logistics-service
+                        docker push butenroma/orders-service
+                    '''
+                }
             }
         }
     }
