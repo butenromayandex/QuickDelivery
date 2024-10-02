@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withCredentials([string(credentialsId: '57f29692-c28f-409f-82ec-8bee5d39394b', variable: 'pwd')]) {
+                withCredentials([string(credentialsId: 'dockerpwd', variable: 'pwd')]) {
                     sh '''
                         docker login -u butenroma -p ${pwd}"
                         docker push butenroma/logistics-service
