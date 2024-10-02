@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/butenromayandex/QuickDelivery.git'
+                git branch: 'main',
+                    url: 'https://github.com/butenromayandex/QuickDelivery.git'
             }
         }
 //         stage('Build') {
