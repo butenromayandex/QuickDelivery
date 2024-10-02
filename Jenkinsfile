@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                    apt-get update
+                    apt-get install -y docker docker-compose
+                '''
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main',
