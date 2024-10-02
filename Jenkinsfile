@@ -21,17 +21,16 @@ pipeline {
                 sh '''
                     docker-compose build
                 '''
-                }
             }
         }
-         stage('Deploy') {
-                steps {
-                    script {
-                        sh 'docker push butenroma/logistics-service'
-                        sh 'docker push butenroma/orders-service'
-                    }
-                }
-         }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker push butenroma/logistics-service
+                    docker push butenroma/orders-service
+                '''
+            }
+        }
     }
 
 //     post {
