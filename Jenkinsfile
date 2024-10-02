@@ -39,7 +39,7 @@ pipeline {
             script {
                 docker.image('docker:latest').inside {
                     sh 'docker'
-                    sh 'docker compose up -d --build --orders'
+                    sh 'docker compose up -d --build orders'
                 }
             }
         }
