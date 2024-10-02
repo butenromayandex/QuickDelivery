@@ -1,4 +1,4 @@
-name: 'quick-delivery'
+#name: 'quick-delivery'
 
 services:
   order-service:
