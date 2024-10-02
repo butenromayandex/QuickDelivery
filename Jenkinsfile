@@ -28,8 +28,13 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Push') {
             steps {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                    }
+                }
                 script {
                     docker.image('docker:latest').inside {
                         sh '''
