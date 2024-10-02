@@ -33,15 +33,7 @@ pipeline {
                 }
             }
          }
-//     stage('Test') {
-//         steps {
-//             script {
-//                 docker.image('maven:3.6.3').inside {
-//                     sh 'mvn test'
-//                 }
-//             }
-//         }
-//     }
+    }
 
 //     post {
 //         always {
