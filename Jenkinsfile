@@ -4,11 +4,16 @@ pipeline {
         DOCKER_PWD = credentials('dockerpwd')
     }
     stages {
-        stage('Install Dependencies') {
+        stage('Install Docker') {
+            agent {
+                docker {
+                    image 'docker:latest'
+                }
+            }
             steps {
                 sh '''
-                    apt-get update
-                    apt-get install -y docker docker-compose
+                    docker -v
+                    docker compose -v
                 '''
             }
         }
