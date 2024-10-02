@@ -4,11 +4,6 @@ pipeline {
         DOCKER_PWD = credentials('dockerpwd')
     }
     stages {
-        stage('test docker') {
-            steps {
-                sh 'docker'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -23,16 +18,16 @@ pipeline {
                     url: 'https://github.com/butenromayandex/QuickDelivery.git'
             }
         }
-//         stage('Build') {
-//             steps {
-//                 scripts {
-//                     @docker.image('docker:latest').inside {
-//                         sh 'docker-compose'
-//                         sh 'docker-compose build'
-//                     }
-//                 }
-//             }
-//         }
+        stage('Build') {
+            steps {
+                script {
+                    docker.image('docker:latest').inside {
+                        sh 'docker-compose'
+                        sh 'docker-compose build'
+                    }
+                }
+            }
+        }
 //         stage('Deploy') {
 //             steps {
 //                 scripts {
