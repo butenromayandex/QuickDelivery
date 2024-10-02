@@ -4,6 +4,9 @@ pipeline {
         DOCKER_PWD = credentials('dockerpwd')
     }
     stages {
+        stage('test docker') {
+            sh 'docker'
+        }
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -18,36 +21,29 @@ pipeline {
                     url: 'https://github.com/butenromayandex/QuickDelivery.git'
             }
         }
-        stage('Build') {
-            steps {
-                scripts {
-                    @docker.image('docker:latest').inside {
-                        sh 'docker-compose'
-                        sh 'docker-compose build'
-                    }
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                scripts {
-                    @docker.image('docker:latest').inside {
-                        sh '''
-                            docker image ls
-                            docker login -u butenroma -p $DOCKER_PWD
-                            docker push butenroma/logistics-service:latest
-                            docker push butenroma/orders-service:latest
-                        '''
-                    }
-                }
-            }
-        }
-    }
-
-//     post {
-//         always {
-//             junit 'target/surefire-reports/*.xml'
-//             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+//         stage('Build') {
+//             steps {
+//                 scripts {
+//                     @docker.image('docker:latest').inside {
+//                         sh 'docker-compose'
+//                         sh 'docker-compose build'
+//                     }
+//                 }
+//             }
 //         }
-//     }
+//         stage('Deploy') {
+//             steps {
+//                 scripts {
+//                     @docker.image('docker:latest').inside {
+//                         sh '''
+//                             docker image ls
+//                             docker login -u butenroma -p $DOCKER_PWD
+//                             docker push butenroma/logistics-service:latest
+//                             docker push butenroma/orders-service:latest
+//                         '''
+//                     }
+//                 }
+//             }
+//         }
+    }
 }
