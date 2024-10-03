@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_PWD = credentials('dockerpwd')
+        HELM_RELEASE = "logistics-service"
     }
     stages {
         stage('Install Dependencies') {
@@ -28,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('Push') {
+        stage('Push Docker Images') {
             when {
                 expression {
                     currentBuild.result == null || currentBuild.result == 'SUCCESS'
@@ -43,6 +44,13 @@ pipeline {
                             docker push butenroma/order-service:latest
                         '''
                     }
+                }
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    sh "helm upgrade --install ${HELM_RELEASE} ./charts/logistics-service"
                 }
             }
         }

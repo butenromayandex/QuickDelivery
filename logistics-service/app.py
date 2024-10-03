@@ -4,7 +4,9 @@ from utils.db_utils import init_db
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+tmp_db_url = 'postgresql://postgres:password@postgres:5432/logistics'
+app.config['SQLALCHEMY_DATABASE_URI'] = tmp_db_url
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 db.init_app(app)
 
 @app.route('/deliveries', methods=['POST'])

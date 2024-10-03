@@ -2,8 +2,9 @@
 
 services:
   order-service:
+    #    d run -e DATABASE_URL=postgresql://user:password@pg.local:5454/orders -p 6000:5000 --platform linux/arm64 butenroma/order-service
     build: ./order-service
-    image: 'butenroma/order-service:latest'
+    image: butenroma/order-service:latest
     container_name: order-service
     ports:
       - "6000:5000"
@@ -15,8 +16,9 @@ services:
       - quickdelivery-network
 
   logistics-service:
+    #   d run -e DATABASE_URL=postgresql://user:password@pg.local:5454/logistics -p 6001:5001 --platform linux/arm64 butenroma/logistics-service
     build: ./logistics-service
-    image: 'butenroma/logistics-service:latest'
+    image: butenroma/logistics-service:latest
     container_name: logistics-service
     ports:
       - "6001:5001"
