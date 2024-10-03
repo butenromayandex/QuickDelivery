@@ -62,8 +62,6 @@ pipeline {
             agent {
                 docker {
                     image 'lachlanevenson/k8s-helm:v3.1.1'
-                    ttyEnabled true
-                    command 'cat'
                 }
             }
             steps {
