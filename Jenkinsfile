@@ -48,6 +48,16 @@ pipeline {
             }
         }
         stage('Deploy to Kubernetes') {
+            agent {
+                kubernetes {
+                    containerTemplate {
+                        name 'helm'
+                        image 'lachlanevenson/k8s-helm:v3.1.1'
+                        ttyEnabled true
+                        command 'cat'
+                    }
+                }
+            }
             steps {
                 script {
                     sh "helm upgrade --install ${HELM_RELEASE} ./charts/logistics-service"
