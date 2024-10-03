@@ -47,4 +47,13 @@ pipeline {
             }
         }
     }
+//     post {
+//         always {
+//             emailext (
+//                 subject: "Build ${currentBuild.fullDisplayName}",
+//                 body: "Check console output at ${env.BUILD_URL} to view the results.",
+//                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+//             )
+//         }
+//     }
 }
