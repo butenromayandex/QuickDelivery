@@ -59,11 +59,6 @@ pipeline {
             }
         }
         stage('Deploy to Kubernetes') {
-            agent {
-                docker {
-                    image 'lachlanevenson/k8s-helm:v3.1.1'
-                }
-            }
             steps {
                 script {
                     sh 'ls -la'
