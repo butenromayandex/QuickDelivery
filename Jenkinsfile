@@ -63,7 +63,7 @@ pipeline {
                 script {
                     sh 'ls -la'
                     sh 'helm'
-//                     sh "helm upgrade --install ${HELM_RELEASE} ./charts/logistics-service"
+                    sh "helm upgrade --install ${HELM_RELEASE} ./charts/logistics-service"
                 }
             }
         }
