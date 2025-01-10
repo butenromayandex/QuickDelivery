@@ -5,6 +5,13 @@ pipeline {
         HELM_RELEASE = "logistics-service"
     }
     stages {
+        stage('test deps') {
+            steps {
+                sh '''
+                    ls
+                '''
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -36,6 +43,8 @@ pipeline {
                     docker.image('docker:latest').inside {
                         sh 'docker-compose'
                         sh 'docker-compose build'
+                        sh 'ls'
+                        sh 'docker --version'
                     }
                 }
             }
