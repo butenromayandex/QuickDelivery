@@ -36,6 +36,8 @@ pipeline {
                     docker.image('docker:latest').inside {
                         sh 'docker-compose'
                         sh 'docker-compose build'
+                        sh 'ls'
+                        sh 'docker --version'
                     }
                 }
             }
